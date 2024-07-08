@@ -3,9 +3,8 @@ import { getFirestore, collection, query, where,getDoc, getDocs, updateDoc } fro
 
 // Retrieve user and access token from session storage
 const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-const accessToken = sessionStorage.getItem('accessToken');
 
-if (!currentUser || !accessToken) {
+if (!currentUser) {
     // Handle case where authentication information is missing
     // Redirect user back to login page or handle accordingly
     window.location.href = 'index.html'; // Redirect to login page
@@ -39,6 +38,15 @@ if (!currentUser || !accessToken) {
         globalCourses = courses
         return courses;
     }
+
+    const logoutButton = document.getElementById('logoutButton');
+    logoutButton.addEventListener('click', () => {
+        // Clear session storage
+        sessionStorage.removeItem('currentUser');
+
+        // Redirect to login page
+        window.location.href = 'index.html';
+    });
 
     // Wait for DOM content to load before manipulating
     // Wait for DOM content to load before manipulating
